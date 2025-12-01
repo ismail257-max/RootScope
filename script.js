@@ -56,64 +56,11 @@ if (mobileMenuToggle) {
 // ==========================================
 // FORM SUBMISSION HANDLING
 // ==========================================
+// CONTACT FORM - Handled by Formspree
+// ==========================================
 
-const contactForm = document.getElementById('contactForm');
-const formSuccess = document.getElementById('formSuccess');
-
-if (contactForm) {
-    contactForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        
-        // Get form data
-        const formData = {
-            name: document.getElementById('name').value,
-            email: document.getElementById('email').value,
-            company: document.getElementById('company').value,
-            service: document.getElementById('service').value,
-            message: document.getElementById('message').value,
-            authorization: document.getElementById('authorization').checked
-        };
-        
-        // Validate form
-        if (!formData.authorization) {
-            alert('Please confirm you have authorization for security testing.');
-            return;
-        }
-        
-        // Here you would normally send the data to a server
-        // For now, we'll just show a success message
-        console.log('Form submitted:', formData);
-        
-        // Show success message
-        contactForm.style.display = 'none';
-        formSuccess.style.display = 'block';
-        
-        // Scroll to success message
-        formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        
-        // Optional: Send email notification using a service like Formspree or EmailJS
-        // Example with Formspree (you'll need to set up an account):
-        /*
-        try {
-            const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(formData)
-            });
-            
-            if (response.ok) {
-                contactForm.style.display = 'none';
-                formSuccess.style.display = 'block';
-            }
-        } catch (error) {
-            console.error('Error:', error);
-            alert('There was an error submitting the form. Please try again.');
-        }
-        */
-    });
-}
+// Formspree handles form submission naturally
+// No custom JavaScript needed - just validates required fields
 
 // ==========================================
 // TYPING ANIMATION FOR HERO

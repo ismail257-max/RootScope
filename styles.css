@@ -543,6 +543,52 @@ section {
 }
 
 /* ========================================
+   WHY WORK WITH ME SECTION
+======================================== */
+
+.why-me {
+    background: var(--bg-primary);
+}
+
+.why-me-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+}
+
+.why-me-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 32px;
+    transition: var(--transition);
+}
+
+.why-me-card:hover {
+    border-color: var(--accent-primary);
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-glow);
+}
+
+.why-me-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+}
+
+.why-me-card h3 {
+    font-size: 20px;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+    line-height: 1.3;
+}
+
+.why-me-card p {
+    font-size: 15px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* ========================================
    SERVICES SECTION
 ======================================== */
 
@@ -845,6 +891,134 @@ section {
 }
 
 /* ========================================
+   PRICING SECTION
+======================================== */
+
+.pricing {
+    background: var(--bg-primary);
+}
+
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    margin-bottom: 40px;
+}
+
+.pricing-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 40px;
+    transition: var(--transition);
+    position: relative;
+}
+
+.pricing-card:hover {
+    border-color: var(--accent-primary);
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-glow);
+}
+
+.pricing-featured {
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 40px rgba(0, 255, 136, 0.15);
+}
+
+.pricing-badge {
+    display: inline-block;
+    padding: 6px 16px;
+    background: rgba(0, 255, 136, 0.1);
+    border: 1px solid var(--accent-primary);
+    border-radius: 6px;
+    font-size: 12px;
+    color: var(--accent-primary);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 16px;
+}
+
+.pricing-badge.featured {
+    background: var(--accent-primary);
+    color: var(--bg-primary);
+}
+
+.pricing-card h3 {
+    font-size: 24px;
+    color: var(--text-primary);
+    margin-bottom: 16px;
+}
+
+.pricing-price {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+    margin-bottom: 32px;
+}
+
+.price-currency {
+    font-size: 24px;
+    color: var(--accent-primary);
+    font-weight: 600;
+}
+
+.price-amount {
+    font-size: 48px;
+    font-weight: 700;
+    color: var(--text-primary);
+    font-family: var(--font-display);
+}
+
+.price-period {
+    font-size: 14px;
+    color: var(--text-muted);
+}
+
+.pricing-features {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 32px;
+}
+
+.pricing-features li {
+    padding: 12px 0;
+    color: var(--text-secondary);
+    font-size: 15px;
+    border-bottom: 1px solid var(--border-color);
+    line-height: 1.5;
+}
+
+.pricing-features li:last-child {
+    border-bottom: none;
+}
+
+.pricing-note {
+    text-align: center;
+    padding: 32px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.pricing-note p {
+    font-size: 15px;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+}
+
+.pricing-note p:last-child {
+    margin-bottom: 0;
+}
+
+.payment-terms {
+    color: var(--accent-primary) !important;
+    font-size: 14px !important;
+}
+
+/* ========================================
    CONTACT SECTION
 ======================================== */
 
@@ -1115,7 +1289,9 @@ section {
     }
     
     .services-grid,
-    .portfolio-grid {
+    .portfolio-grid,
+    .pricing-grid,
+    .why-me-grid {
         grid-template-columns: repeat(2, 1fr);
     }
     
@@ -1184,12 +1360,15 @@ section {
     }
     
     .services-grid,
-    .portfolio-grid {
+    .portfolio-grid,
+    .pricing-grid,
+    .why-me-grid {
         grid-template-columns: 1fr;
     }
     
     .service-card,
-    .portfolio-card {
+    .portfolio-card,
+    .pricing-card {
         padding: 24px;
     }
     
@@ -1244,6 +1423,10 @@ section {
     .mission-box {
         padding: 24px;
     }
+    
+    .price-amount {
+        font-size: 36px;
+    }
 }
 
 /* ========================================
@@ -1274,20 +1457,40 @@ section {
 
 .service-card,
 .portfolio-card,
-.credential-card {
+.credential-card,
+.why-me-card,
+.pricing-card {
     animation: fadeInUp 0.6s ease-out both;
 }
 
-.service-card:nth-child(1) {
+.service-card:nth-child(1),
+.why-me-card:nth-child(1),
+.pricing-card:nth-child(1) {
     animation-delay: 0.1s;
 }
 
-.service-card:nth-child(2) {
+.service-card:nth-child(2),
+.why-me-card:nth-child(2),
+.pricing-card:nth-child(2) {
     animation-delay: 0.2s;
 }
 
-.service-card:nth-child(3) {
+.service-card:nth-child(3),
+.why-me-card:nth-child(3),
+.pricing-card:nth-child(3) {
     animation-delay: 0.3s;
+}
+
+.why-me-card:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+.why-me-card:nth-child(5) {
+    animation-delay: 0.5s;
+}
+
+.why-me-card:nth-child(6) {
+    animation-delay: 0.6s;
 }
 
 /* Selection Styling */

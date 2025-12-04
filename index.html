@@ -869,7 +869,7 @@
         </div>
     </section>
 
-    <!-- Footer -->
+<!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
@@ -911,5 +911,50 @@
     </footer>
 
     <script src="script.js"></script>
+    
+    <!-- Custom Form Redirect Handler -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var form = document.getElementById('contactForm');
+        
+        if (form) {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                var formData = new FormData(this);
+                var button = this.querySelector('button[type="submit"]');
+                var originalButtonText = button.innerHTML;
+                
+                // Show loading state
+                button.disabled = true;
+                button.innerHTML = '<span>Sending...</span>';
+                
+                // Submit to Formspree
+                fetch(this.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                }).then(function(response) {
+                    if (response.ok) {
+                        // Success - redirect to thank you page
+                        window.location.href = 'https://ismail257-max.github.io/RootScope/thank-you.html';
+                    } else {
+                        // Error handling
+                        button.disabled = false;
+                        button.innerHTML = originalButtonText;
+                        alert('There was a problem submitting your form. Please try again or email directly.');
+                    }
+                }).catch(function(error) {
+                    // Network error handling
+                    button.disabled = false;
+                    button.innerHTML = originalButtonText;
+                    alert('There was a problem submitting your form. Please try again or email directly.');
+                });
+            });
+        }
+    });
+    </script>
 </body>
 </html>

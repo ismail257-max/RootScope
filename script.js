@@ -34,7 +34,10 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             });
             
             // Close mobile menu if open
-            mobileMenu.classList.remove('active');
+            const mobileMenu = document.querySelector('.nav-links');
+            if (mobileMenu) {
+                mobileMenu.classList.remove('active');
+            }
         }
     });
 });
@@ -54,72 +57,48 @@ if (mobileMenuToggle) {
 }
 
 // ==========================================
-// FORM SUBMISSION HANDLING
-// ==========================================
-// CONTACT FORM - Handled by Formspree
+// TERMINAL TYPING ANIMATION
 // ==========================================
 
-// Formspree handles form submission naturally
-// No custom JavaScript needed - just validates required fields
+const terminalText = document.getElementById('terminal-text');
+const terminalOutput = document.getElementById('terminal-output');
 
-// ==========================================
-// TYPING ANIMATION FOR HERO
-// ==========================================
+const commands = [
+    { 
+        cmd: 'nmap -sV target.com', 
+        output: 'Starting Nmap scan...\nPORT     STATE SERVICE\n443/tcp  open  https\n80/tcp   open  http\n\nScan complete. 2 critical issues found.'
+    }
+];
 
-const typingText = document.querySelector('.typing-text');
-if (typingText) {
-    const text = typingText.textContent;
-    typingText.textContent = '';
-    let i = 0;
-    
-    function typeWriter() {
-        if (i < text.length) {
-            typingText.textContent += text.charAt(i);
-            i++;
-            setTimeout(typeWriter, 50);
+let commandIndex = 0;
+let charIndex = 0;
+let isTyping = true;
+
+function typeCommand() {
+    if (commandIndex < commands.length) {
+        const currentCommand = commands[commandIndex].cmd;
+        
+        if (charIndex < currentCommand.length) {
+            terminalText.textContent = currentCommand.substring(0, charIndex + 1);
+            charIndex++;
+            setTimeout(typeCommand, 80);
+        } else {
+            // Command fully typed, show output
+            setTimeout(() => {
+                terminalOutput.textContent = commands[commandIndex].output;
+                isTyping = false;
+            }, 500);
         }
     }
-    
-    // Start typing animation after page loads
-    window.addEventListener('load', () => {
-        setTimeout(typeWriter, 500);
-    });
 }
 
-// ==========================================
-// SCROLL ANIMATIONS
-// ==========================================
-
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-        }
-    });
-}, observerOptions);
-
-// Observe elements for animation
-document.addEventListener('DOMContentLoaded', () => {
-    const animateElements = document.querySelectorAll(
-        '.service-card, .portfolio-card, .credential-card, .process-step'
-    );
-    
-    animateElements.forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-        el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
-        observer.observe(el);
-    });
+// Start typing animation after page loads
+window.addEventListener('load', () => {
+    setTimeout(typeCommand, 1000);
 });
 
 // ==========================================
-// STATS COUNTER ANIMATION
+// STATISTICS COUNTER ANIMATION
 // ==========================================
 
 function animateCounter(element, target, duration = 2000) {
@@ -143,12 +122,12 @@ function animateCounter(element, target, duration = 2000) {
 const statsObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            const statNumber = entry.target.querySelector('.stat-number');
-            const targetText = statNumber.textContent;
-            const targetNum = parseInt(targetText.replace(/\D/g, ''));
+            const statBox = entry.target;
+            const statNumber = statBox.querySelector('.stat-number');
+            const target = parseInt(statBox.getAttribute('data-target'));
             
-            if (!isNaN(targetNum) && targetNum > 0) {
-                animateCounter(statNumber, targetNum);
+            if (!isNaN(target) && target > 0) {
+                animateCounter(statNumber, target);
             }
             
             statsObserver.unobserve(entry.target);
@@ -156,8 +135,40 @@ const statsObserver = new IntersectionObserver((entries) => {
     });
 }, { threshold: 0.5 });
 
-document.querySelectorAll('.stat-item').forEach(stat => {
+document.querySelectorAll('.stat-box').forEach(stat => {
     statsObserver.observe(stat);
+});
+
+// ==========================================
+// SCROLL ANIMATIONS
+// ==========================================
+
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+        }
+    });
+}, observerOptions);
+
+// Observe elements for animation
+document.addEventListener('DOMContentLoaded', () => {
+    const animateElements = document.querySelectorAll(
+        '.service-card, .portfolio-card, .credential-card, .process-step, .why-me-card, .tool-screenshot, .testimonial-card, .faq-item'
+    );
+    
+    animateElements.forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px)';
+        el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+        observer.observe(el);
+    });
 });
 
 // ==========================================
@@ -273,8 +284,10 @@ if ('IntersectionObserver' in window) {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const img = entry.target;
-                img.src = img.dataset.src;
-                img.classList.add('loaded');
+                if (img.dataset.src) {
+                    img.src = img.dataset.src;
+                    img.classList.add('loaded');
+                }
                 imageObserver.unobserve(img);
             }
         });
@@ -300,15 +313,17 @@ console.log('%c⚠️ Warning: Unauthorized security testing is illegal. Always 
 document.addEventListener('DOMContentLoaded', () => {
     console.log('RootScope Security website loaded successfully');
     
-    // Add any initialization code here
-    
-    // Example: Add a loading animation that fades out
-    const loader = document.querySelector('.loader');
-    if (loader) {
+    // Add smooth reveal for hero content
+    const heroContent = document.querySelector('.hero-content');
+    if (heroContent) {
+        heroContent.style.opacity = '0';
+        heroContent.style.transform = 'translateY(30px)';
+        
         setTimeout(() => {
-            loader.style.opacity = '0';
-            setTimeout(() => loader.remove(), 300);
-        }, 500);
+            heroContent.style.transition = 'opacity 0.8s ease-out, transform 0.8s ease-out';
+            heroContent.style.opacity = '1';
+            heroContent.style.transform = 'translateY(0)';
+        }, 100);
     }
 });
 
@@ -319,6 +334,52 @@ document.addEventListener('DOMContentLoaded', () => {
 window.addEventListener('error', (e) => {
     console.error('An error occurred:', e.error);
     // You could send error reports to a logging service here
+});
+
+// ==========================================
+// TOOLS SHOWCASE IMAGE LOADING
+// ==========================================
+
+// Add loading states for tool screenshots
+document.querySelectorAll('.tool-screenshot img').forEach(img => {
+    img.addEventListener('load', function() {
+        this.parentElement.classList.add('loaded');
+    });
+    
+    img.addEventListener('error', function() {
+        console.error('Failed to load image:', this.src);
+        this.parentElement.classList.add('error');
+    });
+});
+
+// ==========================================
+// FAQ ACCORDION FUNCTIONALITY (Optional)
+// ==========================================
+
+// If you want to add collapsible FAQs in the future, this is ready
+const faqItems = document.querySelectorAll('.faq-item');
+
+faqItems.forEach(item => {
+    const question = item.querySelector('.faq-question');
+    
+    if (question) {
+        question.style.cursor = 'pointer';
+        
+        question.addEventListener('click', () => {
+            const answer = item.querySelector('.faq-answer');
+            const isOpen = item.classList.contains('open');
+            
+            // Close all other FAQs (optional - remove if you want multiple open)
+            // faqItems.forEach(otherItem => {
+            //     if (otherItem !== item) {
+            //         otherItem.classList.remove('open');
+            //     }
+            // });
+            
+            // Toggle current FAQ
+            item.classList.toggle('open');
+        });
+    }
 });
 
 // ==========================================

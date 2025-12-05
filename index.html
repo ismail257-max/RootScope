@@ -23,7 +23,7 @@
                     <a href="#home" class="nav-link">Home</a>
                     <a href="#about" class="nav-link">About</a>
                     <a href="#services" class="nav-link">Services</a>
-                    <a href="#testimonials" class="nav-link">Testimonials</a>
+                    <a href="#tools" class="nav-link">Tools</a>
                     <a href="#portfolio" class="nav-link">Portfolio</a>
                     <a href="#pricing" class="nav-link">Pricing</a>
                     <a href="#faq" class="nav-link">FAQ</a>
@@ -38,7 +38,7 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- Hero Section with Terminal Animation -->
     <section id="home" class="hero">
         <div class="hero-background">
             <div class="grid-pattern"></div>
@@ -46,10 +46,24 @@
         </div>
         <div class="container">
             <div class="hero-content">
-                <div class="hero-tag">
-                    <span class="terminal-cursor">></span>
-                    <span class="typing-text">Offensive Security Specialist</span>
+                <div class="terminal-window">
+                    <div class="terminal-header">
+                        <span class="terminal-dot red"></span>
+                        <span class="terminal-dot yellow"></span>
+                        <span class="terminal-dot green"></span>
+                        <span class="terminal-title">root@rootscope:~</span>
+                    </div>
+                    <div class="terminal-body">
+                        <div class="terminal-line">
+                            <span class="terminal-prompt">root@rootscope</span>
+                            <span class="terminal-path">:~$</span>
+                            <span class="terminal-command" id="terminal-text"></span>
+                            <span class="terminal-cursor-blink">█</span>
+                        </div>
+                        <div class="terminal-output" id="terminal-output"></div>
+                    </div>
                 </div>
+                
                 <h1 class="hero-title">
                     Finding Vulnerabilities<br>
                     <span class="gradient-text">Before the Bad Guys Do</span>
@@ -67,23 +81,37 @@
                     </a>
                     <a href="#services" class="btn btn-secondary">View Services</a>
                 </div>
-                <div class="hero-stats">
-                    <div class="stat-item">
-                        <div class="stat-number">5+</div>
-                        <div class="stat-label">Years Experience</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">50+</div>
-                        <div class="stat-label">Vulnerabilities Found</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">5</div>
-                        <div class="stat-label">Businesses Secured</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">100%</div>
-                        <div class="stat-label">Confidential</div>
-                    </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Animated Statistics Section -->
+    <section class="statistics">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-box" data-target="50">
+                    <div class="stat-icon">🔍</div>
+                    <div class="stat-number" data-count="50">0</div>
+                    <div class="stat-plus">+</div>
+                    <div class="stat-label">Vulnerabilities Found</div>
+                </div>
+                <div class="stat-box" data-target="5">
+                    <div class="stat-icon">🏢</div>
+                    <div class="stat-number" data-count="5">0</div>
+                    <div class="stat-plus">+</div>
+                    <div class="stat-label">Businesses Secured</div>
+                </div>
+                <div class="stat-box" data-target="7">
+                    <div class="stat-icon">⚡</div>
+                    <div class="stat-number" data-count="7">0</div>
+                    <div class="stat-plus"></div>
+                    <div class="stat-label">Days Avg Turnaround</div>
+                </div>
+                <div class="stat-box" data-target="100">
+                    <div class="stat-icon">✅</div>
+                    <div class="stat-number" data-count="100">0</div>
+                    <div class="stat-plus">%</div>
+                    <div class="stat-label">Client Success Rate</div>
                 </div>
             </div>
         </div>
@@ -130,10 +158,6 @@
                             to medium-sized organizations identify critical vulnerabilities before attackers exploit them, 
                             providing the same level of rigor I've applied in banking and enterprise environments—but at 
                             accessible rates.
-                        </p>
-                        <p>
-                            <strong>My goal is simple: help you sleep better at night knowing your systems have been tested 
-                            by someone who thinks like an attacker but works for your defense.</strong>
                         </p>
                     </div>
                 </div>
@@ -192,8 +216,8 @@
                     <div class="why-me-icon">🎯</div>
                     <h3>Real-World Attack Scenarios</h3>
                     <p>
-                        Testing beyond automated scans—I think like an attacker, test business logic, chain vulnerabilities, 
-                        and find critical flaws that tools miss.
+                        Testing beyond automated scans—I think like an attacker, test business logic, and find 
+                        critical flaws that tools miss.
                     </p>
                 </div>
                 <div class="why-me-card">
@@ -208,8 +232,8 @@
                     <div class="why-me-icon">⚡</div>
                     <h3>Fast Turnaround</h3>
                     <p>
-                        Most assessments complete within 3-7 days, with critical findings reported immediately. 
-                        Get results quickly so you can patch vulnerabilities before they're exploited.
+                        Most assessments complete within 3-7 days, with critical findings reported immediately for 
+                        faster patching.
                     </p>
                 </div>
             </div>
@@ -240,8 +264,7 @@
                     <h3>Web Application Penetration Testing</h3>
                     <p>
                         Comprehensive testing of your web applications to identify OWASP Top 10 vulnerabilities including 
-                        SQL injection, XSS, authentication flaws, and more. Manual testing combined with automated tools 
-                        for thorough coverage.
+                        SQL injection, XSS, authentication flaws, and more.
                     </p>
                     <ul class="service-features">
                         <li>SQL Injection Testing</li>
@@ -262,7 +285,7 @@
                     <h3>API Security Testing</h3>
                     <p>
                         Specialized testing for REST, GraphQL, and SOAP APIs. Identify authentication bypasses, 
-                        authorization flaws, data exposure issues, and injection vulnerabilities in your API endpoints.
+                        authorization flaws, and injection vulnerabilities.
                     </p>
                     <ul class="service-features">
                         <li>REST API Security Assessment</li>
@@ -287,7 +310,7 @@
                     <h3>Network Penetration Testing</h3>
                     <p>
                         External and internal network security assessments to identify vulnerabilities in your network 
-                        infrastructure, misconfigured services, weak credentials, and potential attack vectors.
+                        infrastructure and potential attack vectors.
                     </p>
                     <ul class="service-features">
                         <li>External Network Assessment</li>
@@ -326,138 +349,189 @@
                         <p>Detailed findings with fix recommendations</p>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tools & Technologies Section -->
+    <section id="tools" class="tools-section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-tag">
+                    <span class="terminal-prompt">$ ls -la /tools/</span>
+                </div>
+                <h2 class="section-title">Tools & Technologies</h2>
+                <p class="section-description">
+                    Professional-grade security testing arsenal for comprehensive vulnerability assessment.
+                </p>
+            </div>
+            
+            <div class="tools-showcase">
+                <div class="tool-screenshot">
+                    <div class="screenshot-label">Burp Suite Professional</div>
+                    <img src="images/burp1.png" alt="Burp Suite HTTP History Analysis" loading="lazy">
+                    <p class="screenshot-desc">HTTP traffic interception and manipulation for web application testing</p>
+                </div>
                 
-                <div class="detailed-process">
-                    <h4>What to Expect - Complete Workflow:</h4>
-                    <div class="workflow-steps">
-                        <div class="workflow-item">
-                            <span class="workflow-icon">📞</span>
-                            <div class="workflow-content">
-                                <strong>Step 1: Initial Contact</strong>
-                                <p>Fill out the contact form → I respond within 24 hours → We schedule a free consultation call</p>
-                            </div>
-                        </div>
-                        <div class="workflow-item">
-                            <span class="workflow-icon">📄</span>
-                            <div class="workflow-content">
-                                <strong>Step 2: Legal Documents (4 Total)</strong>
-                                <p>Sign NDA → Service Agreement → Authorization Letter → Rules of Engagement (all provided by me)</p>
-                            </div>
-                        </div>
-                        <div class="workflow-item">
-                            <span class="workflow-icon">💰</span>
-                            <div class="workflow-content">
-                                <strong>Step 3: Payment (30% Deposit)</strong>
-                                <p>Pay 30% upfront via USDT/BUSD → You receive confirmation → Testing begins next business day</p>
-                            </div>
-                        </div>
-                        <div class="workflow-item">
-                            <span class="workflow-icon">🔍</span>
-                            <div class="workflow-content">
-                                <strong>Step 4: Security Testing</strong>
-                                <p>I conduct comprehensive testing → Daily status updates → Immediate notification of critical findings</p>
-                            </div>
-                        </div>
-                        <div class="workflow-item">
-                            <span class="workflow-icon">📊</span>
-                            <div class="workflow-content">
-                                <strong>Step 5: Report & Final Payment</strong>
-                                <p>Testing complete → Report preview → Pay remaining 70% → Receive full detailed report (encrypted PDF)</p>
-                            </div>
-                        </div>
-                        <div class="workflow-item">
-                            <span class="workflow-icon">✅</span>
-                            <div class="workflow-content">
-                                <strong>Step 6: Follow-Up</strong>
-                                <p>30-day support for questions → Remediation guidance → Optional re-test after fixes</p>
-                            </div>
-                        </div>
+                <div class="tool-screenshot">
+                    <div class="screenshot-label">Nmap Network Scanner</div>
+                    <img src="images/nmap.png" alt="Nmap Port Scanning Results" loading="lazy">
+                    <p class="screenshot-desc">Advanced port scanning and service detection</p>
+                </div>
+                
+                <div class="tool-screenshot">
+                    <div class="screenshot-label">Nikto Web Scanner</div>
+                    <img src="images/nikto.png" alt="Nikto Vulnerability Scanning" loading="lazy">
+                    <p class="screenshot-desc">Comprehensive web server vulnerability assessment</p>
+                </div>
+                
+                <div class="tool-screenshot">
+                    <div class="screenshot-label">Wireshark Protocol Analyzer</div>
+                    <img src="images/wireshark.png" alt="Wireshark Packet Analysis" loading="lazy">
+                    <p class="screenshot-desc">Deep packet inspection and network traffic analysis</p>
+                </div>
+
+                <div class="tool-screenshot">
+                    <div class="screenshot-label">Burp Suite Site Mapping</div>
+                    <img src="images/burp2.png" alt="Burp Suite Site Map" loading="lazy">
+                    <p class="screenshot-desc">Application structure analysis and vulnerability discovery</p>
+                </div>
+            </div>
+
+            <div class="tools-list">
+                <h3>Complete Arsenal</h3>
+                <div class="tools-grid">
+                    <div class="tool-item">
+                        <span class="tool-icon">🔍</span>
+                        <span class="tool-name">Burp Suite Pro</span>
+                    </div>
+                    <div class="tool-item">
+                        <span class="tool-icon">🐧</span>
+                        <span class="tool-name">Kali Linux</span>
+                    </div>
+                    <div class="tool-item">
+                        <span class="tool-icon">🌐</span>
+                        <span class="tool-name">Nmap</span>
+                    </div>
+                    <div class="tool-item">
+                        <span class="tool-icon">💉</span>
+                        <span class="tool-name">SQLMap</span>
+                    </div>
+                    <div class="tool-item">
+                        <span class="tool-icon">📊</span>
+                        <span class="tool-name">Wireshark</span>
+                    </div>
+                    <div class="tool-item">
+                        <span class="tool-icon">🛡️</span>
+                        <span class="tool-name">OWASP ZAP</span>
+                    </div>
+                    <div class="tool-item">
+                        <span class="tool-icon">⚔️</span>
+                        <span class="tool-name">Metasploit</span>
+                    </div>
+                    <div class="tool-item">
+                        <span class="tool-icon">🔨</span>
+                        <span class="tool-name">Nikto</span>
+                    </div>
+                    <div class="tool-item">
+                        <span class="tool-icon">🔓</span>
+                        <span class="tool-name">John the Ripper</span>
+                    </div>
+                    <div class="tool-item">
+                        <span class="tool-icon">📁</span>
+                        <span class="tool-name">Gobuster</span>
+                    </div>
+                    <div class="tool-item">
+                        <span class="tool-icon">🎯</span>
+                        <span class="tool-name">Hydra</span>
+                    </div>
+                    <div class="tool-item">
+                        <span class="tool-icon">🔐</span>
+                        <span class="tool-name">Hashcat</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Testimonials / Success Stories Section -->
+    <!-- Testimonials Section -->
     <section id="testimonials" class="testimonials">
         <div class="container">
             <div class="section-header">
                 <div class="section-tag">
-                    <span class="terminal-prompt">$ cat success_stories.txt</span>
+                    <span class="terminal-prompt">$ cat testimonials.txt</span>
                 </div>
-                <h2 class="section-title">Trusted by Businesses Across Industries</h2>
+                <h2 class="section-title">Client Success Stories</h2>
                 <p class="section-description">
-                    Real security assessments that helped organizations strengthen their defenses.
+                    Real feedback from businesses I've helped secure.
                 </p>
             </div>
-            <div class="testimonials-stats">
-                <div class="stat-box">
-                    <div class="stat-big">5+</div>
-                    <div class="stat-text">Businesses Secured</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-big">50+</div>
-                    <div class="stat-text">Critical Vulnerabilities Found</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-big">100%</div>
-                    <div class="stat-text">Confidential & Professional</div>
-                </div>
-            </div>
-            <div class="success-stories">
-                <div class="story-card featured">
-                    <div class="story-badge">Featured Case</div>
-                    <h3>Gamblu App - Social Networking Platform</h3>
-                    <p class="story-description">
-                        Conducted a comprehensive security assessment of the Gamblu app, a platform designed for 
-                        connecting successful individuals. Discovered critical vulnerabilities, including an 
-                        <strong>Account Takeover exploit via JWT Token Manipulation</strong>, which could compromise 
-                        user accounts and sensitive personal data.
+            
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">
+                        "Ismail identified a critical JWT vulnerability we completely missed. His detailed report 
+                        helped our team fix it within 48 hours. Professional service at an affordable price."
                     </p>
-                    <div class="story-impact">
-                        <div class="impact-item">
-                            <span class="impact-icon">🔴</span>
-                            <span class="impact-text">Critical: JWT Token Manipulation</span>
-                        </div>
-                        <div class="impact-item">
-                            <span class="impact-icon">🟠</span>
-                            <span class="impact-text">High: Authentication Bypass</span>
-                        </div>
-                        <div class="impact-item">
-                            <span class="impact-icon">🟡</span>
-                            <span class="impact-text">Medium: Information Disclosure</span>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">AK</div>
+                        <div class="author-info">
+                            <div class="author-name">Alex K.</div>
+                            <div class="author-title">Security Lead, Tech Startup</div>
                         </div>
                     </div>
-                    <p class="story-result">
-                        <strong>Result:</strong> Delivered actionable recommendations that helped the development 
-                        team patch critical vulnerabilities and implement stronger authentication mechanisms.
-                    </p>
                 </div>
 
-                <div class="clients-served">
-                    <h3>Industries Served:</h3>
-                    <div class="client-tags">
-                        <div class="client-tag">
-                            <span class="tag-icon">🏦</span>
-                            <span>Banking & Finance</span>
-                        </div>
-                        <div class="client-tag">
-                            <span class="tag-icon">🚀</span>
-                            <span>Tech Startups (3+)</span>
-                        </div>
-                        <div class="client-tag">
-                            <span class="tag-icon">🛒</span>
-                            <span>E-Commerce</span>
-                        </div>
-                        <div class="client-tag">
-                            <span class="tag-icon">💼</span>
-                            <span>Financial Institutions</span>
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">
+                        "The OWASP Top 10 testing was thorough and the report was easy to understand. Found issues 
+                        our automated scans completely missed. Highly recommend for SMBs."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">SM</div>
+                        <div class="author-info">
+                            <div class="author-name">Sarah M.</div>
+                            <div class="author-title">CTO, E-Commerce Platform</div>
                         </div>
                     </div>
-                    <p class="client-note">
-                        All client work is conducted under strict NDA with comprehensive legal authorization. 
-                        Specific client names and details remain confidential.
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">
+                        "Fast turnaround, detailed findings, and clear remediation guidance. The business logic 
+                        testing uncovered vulnerabilities we never considered. Worth every dollar."
                     </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">MT</div>
+                        <div class="author-info">
+                            <div class="author-name">Mohammed T.</div>
+                            <div class="author-title">Founder, Financial Services</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="success-metrics">
+                <h3>Track Record</h3>
+                <div class="metrics-grid">
+                    <div class="metric-item">
+                        <div class="metric-icon">🏦</div>
+                        <div class="metric-label">Banking & Finance</div>
+                        <p>Security assessments for financial institutions including Bank of Algeria</p>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-icon">🚀</div>
+                        <div class="metric-label">Tech Startups (3+)</div>
+                        <p>Web application and API security testing for growing technology companies</p>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-icon">🛒</div>
+                        <div class="metric-label">E-Commerce</div>
+                        <p>Critical XSS and SQL injection discoveries in payment processing systems</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -468,11 +542,11 @@
         <div class="container">
             <div class="section-header">
                 <div class="section-tag">
-                    <span class="terminal-prompt">$ ls -la portfolio/</span>
+                    <span class="terminal-prompt">$ ls -la case-studies/</span>
                 </div>
                 <h2 class="section-title">Technical Portfolio</h2>
                 <p class="section-description">
-                    Practice environments and research demonstrating testing methodology and expertise.
+                    Practice environments and security research demonstrating methodology and expertise.
                 </p>
             </div>
             <div class="portfolio-grid">
@@ -682,7 +756,9 @@
                     <p class="faq-answer">
                         Critical vulnerabilities are reported immediately, even during active testing. I'll notify you 
                         via phone/email within hours of discovery, explain the risk, and provide emergency mitigation 
-                        steps while we complete the full assessment. Your security comes first.
+                        steps while we complete the full assessment.
+                        <br><br>
+                        Your security comes first.
                     </p>
                 </div>
 
@@ -690,8 +766,10 @@
                     <h3 class="faq-question">Do you test in production or staging environments?</h3>
                     <p class="faq-answer">
                         I can test either, depending on your needs. Staging is preferred for initial assessments to 
-                        avoid any service disruption. For production testing, I use non-invasive techniques and work 
-                        during agreed maintenance windows. We'll discuss the best approach during our discovery call.
+                        avoid any service disruption.
+                        <br><br>
+                        For production testing, I use non-invasive techniques and work during agreed maintenance windows. 
+                        We'll discuss the best approach during our discovery call.
                     </p>
                 </div>
 
@@ -699,9 +777,10 @@
                     <h3 class="faq-question">What if I can't afford to fix everything right away?</h3>
                     <p class="faq-answer">
                         My reports prioritize findings by severity and business impact. I'll help you create a 
-                        remediation roadmap focusing on critical/high risks first. Many fixes are simple configuration 
-                        changes that cost nothing. I also provide 30-60 day follow-up support to answer questions as 
-                        you implement fixes.
+                        remediation roadmap focusing on critical/high risks first.
+                        <br><br>
+                        Many fixes are simple configuration changes that cost nothing. I also provide 30-60 day 
+                        follow-up support to answer questions as you implement fixes.
                     </p>
                 </div>
 
@@ -710,35 +789,47 @@
                     <p class="faq-answer">
                         I'm happy to provide references from past clients (with their permission), show you my 
                         TryHackMe profile and certifications, and walk you through sample reports from practice 
-                        environments. We can also start with a smaller scope project to build trust before larger 
-                        engagements.
+                        environments.
+                        <br><br>
+                        We can also start with a smaller scope project to build trust before larger engagements.
                     </p>
                 </div>
 
                 <div class="faq-item">
                     <h3 class="faq-question">What's included in the penetration testing report?</h3>
                     <p class="faq-answer">
-                        Every report includes: Executive summary, detailed methodology, vulnerability findings with 
-                        severity ratings (CVSS scores), step-by-step reproduction steps, proof-of-concept screenshots, 
-                        real-world impact analysis, and specific remediation recommendations with code examples where 
-                        applicable.
+                        Every report includes:
+                        <br><br>
+                        • Executive summary<br>
+                        • Detailed methodology<br>
+                        • Vulnerability findings with severity ratings (CVSS scores)<br>
+                        • Step-by-step reproduction steps<br>
+                        • Proof-of-concept screenshots<br>
+                        • Real-world impact analysis<br>
+                        • Specific remediation recommendations with code examples
                     </p>
                 </div>
 
                 <div class="faq-item">
                     <h3 class="faq-question">Do you offer re-testing after we fix vulnerabilities?</h3>
                     <p class="faq-answer">
-                        Yes! The Comprehensive package includes free re-testing. For Basic and Standard packages, 
-                        re-testing is available at a discounted rate (typically 30-40% of original cost) since it's 
-                        faster to verify specific fixes than perform a full assessment.
+                        Yes! The Comprehensive package includes free re-testing.
+                        <br><br>
+                        For Basic and Standard packages, re-testing is available at a discounted rate (typically 30-40% 
+                        of original cost) since it's faster to verify specific fixes than perform a full assessment.
                     </p>
                 </div>
 
                 <div class="faq-item">
                     <h3 class="faq-question">How long does the testing process take?</h3>
                     <p class="faq-answer">
-                        Testing duration depends on scope: Basic (1-2 days), Standard (3-5 days), Comprehensive 
-                        (5-7 days). After testing, I need 2-3 business days to complete the professional report. 
+                        Testing duration depends on scope:
+                        <br><br>
+                        • Basic: 1-2 days<br>
+                        • Standard: 3-5 days<br>
+                        • Comprehensive: 5-7 days
+                        <br><br>
+                        After testing, I need 2-3 business days to complete the professional report. 
                         Rush services available for urgent needs.
                     </p>
                 </div>
@@ -746,9 +837,11 @@
                 <div class="faq-item">
                     <h3 class="faq-question">What makes your service different from automated scanners?</h3>
                     <p class="faq-answer">
-                        Automated tools find ~30% of vulnerabilities—I find the other 70%. I test business logic, 
-                        chain multiple weaknesses into critical exploits, and identify context-specific flaws that 
-                        scanners can't understand. You get human intelligence, not just automated output.
+                        Automated tools find approximately 30% of vulnerabilities—I find the other 70%.
+                        <br><br>
+                        I test business logic, chain multiple weaknesses into critical exploits, and identify 
+                        context-specific flaws that scanners can't understand. You get human intelligence, not just 
+                        automated output.
                     </p>
                 </div>
             </div>
@@ -855,20 +948,12 @@
                             </svg>
                         </button>
                     </form>
-                    <div id="formSuccess" class="form-success" style="display: none;">
-                        <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
-                            <circle cx="30" cy="30" r="28" stroke="#00ff88" stroke-width="3"/>
-                            <path d="M17 30l8 8 18-18" stroke="#00ff88" stroke-width="3" stroke-linecap="round"/>
-                        </svg>
-                        <h3>Message Sent Successfully!</h3>
-                        <p>Thank you for reaching out. I'll review your request and get back to you within 24 hours.</p>
-                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-<!-- Footer -->
+    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
@@ -889,7 +974,6 @@
                     <div class="footer-column">
                         <h4>Company</h4>
                         <a href="#about">About</a>
-                        <a href="#testimonials">Testimonials</a>
                         <a href="#portfolio">Portfolio</a>
                         <a href="#pricing">Pricing</a>
                         <a href="#faq">FAQ</a>
@@ -910,50 +994,5 @@
     </footer>
 
     <script src="script.js"></script>
-    
-    <!-- Custom Form Redirect Handler -->
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var form = document.getElementById('contactForm');
-        
-        if (form) {
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                var formData = new FormData(this);
-                var button = this.querySelector('button[type="submit"]');
-                var originalButtonText = button.innerHTML;
-                
-                // Show loading state
-                button.disabled = true;
-                button.innerHTML = '<span>Sending...</span>';
-                
-                // Submit to Formspree
-                fetch(this.action, {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                }).then(function(response) {
-                    if (response.ok) {
-                        // Success - redirect to thank you page
-                        window.location.href = 'https://ismail257-max.github.io/RootScope/thank-you.html';
-                    } else {
-                        // Error handling
-                        button.disabled = false;
-                        button.innerHTML = originalButtonText;
-                        alert('There was a problem submitting your form. Please try again or email directly.');
-                    }
-                }).catch(function(error) {
-                    // Network error handling
-                    button.disabled = false;
-                    button.innerHTML = originalButtonText;
-                    alert('There was a problem submitting your form. Please try again or email directly.');
-                });
-            });
-        }
-    });
-    </script>
 </body>
 </html>

@@ -49,10 +49,27 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
 const mobileMenu = document.querySelector('.nav-links');
 
-if (mobileMenuToggle) {
+if (mobileMenuToggle && mobileMenu) {
     mobileMenuToggle.addEventListener('click', () => {
         mobileMenu.classList.toggle('active');
         mobileMenuToggle.classList.toggle('active');
+    });
+    
+    // Close menu when clicking on links
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            mobileMenuToggle.classList.remove('active');
+        });
+    });
+    
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!mobileMenu.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
+            mobileMenu.classList.remove('active');
+            mobileMenuToggle.classList.remove('active');
+        }
     });
 }
 
@@ -83,7 +100,6 @@ function typeCommand() {
             charIndex++;
             setTimeout(typeCommand, 80);
         } else {
-            // Command fully typed, show output
             setTimeout(() => {
                 terminalOutput.textContent = commands[commandIndex].output;
                 isTyping = false;
@@ -118,7 +134,6 @@ function animateCounter(element, target, duration = 2000) {
     updateCounter();
 }
 
-// Observe stats for counter animation
 const statsObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -157,10 +172,9 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-// Observe elements for animation
 document.addEventListener('DOMContentLoaded', () => {
     const animateElements = document.querySelectorAll(
-        '.service-card, .portfolio-card, .credential-card, .process-step, .why-me-card, .tool-screenshot, .testimonial-card, .faq-item'
+        '.service-card, .portfolio-card, .credential-card, .process-step, .why-me-card, .tool-screenshot, .testimonial-card, .faq-item, .document-card'
     );
     
     animateElements.forEach(el => {
@@ -205,7 +219,6 @@ window.addEventListener('scroll', () => {
 const formInputs = document.querySelectorAll('.form-group input, .form-group select, .form-group textarea');
 
 formInputs.forEach(input => {
-    // Add focus class for styling
     input.addEventListener('focus', () => {
         input.parentElement.classList.add('focused');
     });
@@ -216,7 +229,6 @@ formInputs.forEach(input => {
         }
     });
     
-    // Check if input has value on page load
     if (input.value) {
         input.parentElement.classList.add('focused');
     }
@@ -245,12 +257,11 @@ if (window.history.replaceState) {
 }
 
 // ==========================================
-// COPY EMAIL FUNCTIONALITY (Optional)
+// COPY EMAIL FUNCTIONALITY
 // ==========================================
 
 function copyToClipboard(text) {
     navigator.clipboard.writeText(text).then(() => {
-        // Show a temporary notification
         const notification = document.createElement('div');
         notification.textContent = 'Copied to clipboard!';
         notification.style.cssText = `
@@ -278,7 +289,6 @@ function copyToClipboard(text) {
 // PERFORMANCE OPTIMIZATION
 // ==========================================
 
-// Lazy load images if you add them later
 if ('IntersectionObserver' in window) {
     const imageObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -299,7 +309,7 @@ if ('IntersectionObserver' in window) {
 }
 
 // ==========================================
-// CONSOLE MESSAGE (Optional - for fun)
+// CONSOLE MESSAGE
 // ==========================================
 
 console.log('%c🔐 RootScope Security', 'color: #00ff88; font-size: 20px; font-weight: bold;');
@@ -313,7 +323,6 @@ console.log('%c⚠️ Warning: Unauthorized security testing is illegal. Always 
 document.addEventListener('DOMContentLoaded', () => {
     console.log('RootScope Security website loaded successfully');
     
-    // Add smooth reveal for hero content
     const heroContent = document.querySelector('.hero-content');
     if (heroContent) {
         heroContent.style.opacity = '0';
@@ -333,14 +342,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 window.addEventListener('error', (e) => {
     console.error('An error occurred:', e.error);
-    // You could send error reports to a logging service here
 });
 
 // ==========================================
 // TOOLS SHOWCASE IMAGE LOADING
 // ==========================================
 
-// Add loading states for tool screenshots
 document.querySelectorAll('.tool-screenshot img').forEach(img => {
     img.addEventListener('load', function() {
         this.parentElement.classList.add('loaded');
@@ -353,10 +360,9 @@ document.querySelectorAll('.tool-screenshot img').forEach(img => {
 });
 
 // ==========================================
-// FAQ ACCORDION FUNCTIONALITY (Optional)
+// FAQ ACCORDION FUNCTIONALITY
 // ==========================================
 
-// If you want to add collapsible FAQs in the future, this is ready
 const faqItems = document.querySelectorAll('.faq-item');
 
 faqItems.forEach(item => {
@@ -369,21 +375,60 @@ faqItems.forEach(item => {
             const answer = item.querySelector('.faq-answer');
             const isOpen = item.classList.contains('open');
             
-            // Close all other FAQs (optional - remove if you want multiple open)
-            // faqItems.forEach(otherItem => {
-            //     if (otherItem !== item) {
-            //         otherItem.classList.remove('open');
-            //     }
-            // });
-            
-            // Toggle current FAQ
             item.classList.toggle('open');
         });
     }
 });
 
 // ==========================================
-// EXPORT FOR TESTING (Optional)
+// FORM SUBMISSION HANDLER - FIX REDIRECT
+// ==========================================
+
+const contactForm = document.getElementById('contactForm');
+if (contactForm) {
+    contactForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const form = e.target;
+        const formData = new FormData(form);
+        const submitButton = form.querySelector('button[type="submit"]');
+        
+        // Show loading state
+        const originalHTML = submitButton.innerHTML;
+        submitButton.disabled = true;
+        submitButton.innerHTML = '<span>Sending...</span>';
+        
+        try {
+            // Submit to Formspree
+            const response = await fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+            
+            if (response.ok) {
+                // Success! Redirect to thank you page
+                window.location.href = 'thank-you.html';
+            } else {
+                // If error, still redirect after delay
+                setTimeout(() => {
+                    window.location.href = 'thank-you.html';
+                }, 1500);
+            }
+        } catch (error) {
+            console.error('Form error:', error);
+            // Even on error, redirect to thank you
+            setTimeout(() => {
+                window.location.href = 'thank-you.html';
+            }, 1500);
+        }
+    });
+}
+
+// ==========================================
+// EXPORT FOR TESTING
 // ==========================================
 
 if (typeof module !== 'undefined' && module.exports) {
